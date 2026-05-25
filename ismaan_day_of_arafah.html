@@ -1,0 +1,677 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #0D2260;
+    --navy-deep: #081540;
+    --navy-mid: #1a3380;
+    --gold: #F5C800;
+    --gold-dark: #c9a200;
+    --gold-light: #ffe45e;
+    --white: #FFFFFF;
+    --cream: #fffdf0;
+    --text-muted: rgba(255,255,255,0.65);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .site-root {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy-deep);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .stars-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .logo-icon {
+    width: 72px; height: 72px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .moon-wrap {
+    position: relative; width: 72px; height: 72px;
+  }
+
+  .moon-c {
+    position: absolute; bottom: 0; left: 0;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    border: 11px solid white;
+    clip-path: polygon(0 0, 60% 0, 60% 100%, 0 100%);
+    transform: rotate(-20deg);
+    transform-origin: center;
+  }
+
+  .sun-circle {
+    position: absolute; top: 0; right: 0;
+    width: 46px; height: 46px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .logo-brand {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+    color: white;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(245,200,0,0.18);
+    border: 1px solid rgba(245,200,0,0.4);
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-title span { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .hero-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(245,200,0,0.25);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  .divider-moon {
+    text-align: center;
+    padding: 1.5rem 0 0.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .divider-moon svg { opacity: 0.25; }
+
+  .section {
+    position: relative; z-index: 1;
+    padding: 2rem 1.25rem 1rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-icon {
+    width: 38px; height: 38px;
+    background: rgba(245,200,0,0.15);
+    border: 1px solid rgba(245,200,0,0.3);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .section-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .virtue-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .virtue-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    border-radius: 2px 0 0 2px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .virtue-card.open::before { opacity: 1; }
+
+  .virtue-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(245,200,0,0.25);
+  }
+
+  .virtue-card.open {
+    background: rgba(245,200,0,0.06);
+    border-color: rgba(245,200,0,0.3);
+  }
+
+  .virtue-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .virtue-num {
+    width: 28px; height: 28px;
+    background: rgba(245,200,0,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .virtue-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    flex: 1;
+    color: var(--white);
+  }
+
+  .virtue-chevron {
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: transform 0.25s;
+  }
+
+  .virtue-card.open .virtue-chevron { transform: rotate(180deg); }
+
+  .virtue-body {
+    display: none;
+    padding-top: 0.85rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    padding-left: 40px;
+  }
+
+  .virtue-card.open .virtue-body { display: block; }
+
+  .virtue-hadith {
+    margin-top: 0.65rem;
+    padding: 0.65rem 0.85rem;
+    background: rgba(245,200,0,0.08);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: rgba(245,200,0,0.85);
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  .deeds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .deed-tile {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.1rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+
+  .deed-tile:hover, .deed-tile.done {
+    background: rgba(245,200,0,0.1);
+    border-color: rgba(245,200,0,0.4);
+    transform: translateY(-2px);
+  }
+
+  .deed-tile.done .deed-check {
+    opacity: 1; transform: scale(1);
+  }
+
+  .deed-emoji { font-size: 1.6rem; margin-bottom: 0.4rem; }
+
+  .deed-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+    line-height: 1.3;
+  }
+
+  .deed-sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .deed-check {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 18px; height: 18px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: var(--navy-deep);
+    font-weight: 700;
+  }
+
+  .tracker-bar-wrap {
+    background: rgba(255,255,255,0.08);
+    border-radius: 100px;
+    height: 6px;
+    margin: 1rem 0 0.4rem;
+    overflow: hidden;
+  }
+
+  .tracker-bar {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 100px;
+    transition: width 0.4s ease;
+  }
+
+  .tracker-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  .tracker-label span { color: var(--gold); font-weight: 600; }
+
+  .dua-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .dua-arabic {
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 2;
+    color: var(--gold-light);
+    margin-bottom: 0.75rem;
+    direction: rtl;
+    font-family: serif;
+  }
+
+  .dua-transliteration {
+    font-size: 0.82rem;
+    color: rgba(245,200,0,0.75);
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .dua-meaning {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.65;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .tab-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy-deep);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 2rem 1rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: 2rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+
+<div class="site-root">
+  <div class="stars-bg" id="starsBg"></div>
+
+  <div class="hero">
+    <div class="logo-area">
+      <img src="Ism.png" alt="Ismaan logo" style="width: 300px; height: auto;"
+      />
+      <div class="logo-brand"></div>
+    </div>
+
+    <div class="hero-badge">The Blessed Day</div>
+    <h1 class="hero-title">Day of <span>Arafah</span><br>Guide & Virtues</h1>
+    <p class="hero-subtitle">The most sacred day of Dhul Hijjah — a day of immense mercy, forgiveness, and nearness to Allah. Know it. Feel it. Practice it.</p>
+    <div class="hero-date">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      9th Dhul Hijjah — Hajj Season
+    </div>
+  </div>
+
+  <div class="section scroll-reveal">
+    <div class="section-header">
+      <div class="section-icon">✨</div>
+      <div class="section-label">Virtues of the Day</div>
+    </div>
+
+    <div id="virtues-list"></div>
+  </div>
+
+  <div class="divider-moon">
+    <svg width="60" height="30" viewBox="0 0 60 30"><path d="M30 28 C10 28 2 16 2 14 C2 6 10 2 18 4 C14 6 12 10 12 14 C12 22 20 28 30 28Z" fill="white"/></svg>
+  </div>
+
+  <div class="section scroll-reveal">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div class="section-label">Deeds & Tracker</div>
+    </div>
+
+    <div class="tracker-bar-wrap"><div class="tracker-bar" id="trackerBar" style="width:0%"></div></div>
+    <div class="tracker-label">Completed: <span id="trackerCount">0</span> / <span id="trackerTotal">0</span> deeds</div>
+
+    <br>
+    <div class="deeds-grid" id="deedsGrid"></div>
+  </div>
+
+  <div class="section scroll-reveal">
+    <div class="section-header">
+      <div class="section-icon">🤲</div>
+      <div class="section-label">Du'as for Arafah</div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('best', this)">Best Du'a</button>
+      <button class="tab-btn" onclick="switchTab('forgiveness', this)">Forgiveness</button>
+      <button class="tab-btn" onclick="switchTab('general', this)">General</button>
+    </div>
+
+    <div class="tab-content active" id="tab-best">
+      <div class="dua-card">
+        <div class="dua-arabic">لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</div>
+        <div class="dua-transliteration">Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku wa lahul-ḥamdu wa huwa ʿalā kulli shayʾin qadīr</div>
+        <div class="dua-meaning">There is no god but Allah, alone, without partner. His is the sovereignty, His is all praise, and He is powerful over everything.</div>
+      </div>
+      <div class="virtue-hadith" style="margin: 0; border-radius: 8px; border-left-width: 3px;">"The best du'a is the du'a of the Day of Arafah, and the best thing that I and the prophets before me have said is: Lā ilāha illallāhu waḥdahu lā sharīka lah..." — Prophet Muhammad ﷺ (Tirmidhi)</div>
+    </div>
+
+    <div class="tab-content" id="tab-forgiveness">
+      <div class="dua-card">
+        <div class="dua-arabic">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</div>
+        <div class="dua-transliteration">Allāhumma innaka ʿafuwwun tuḥibbul-ʿafwa faʿfu ʿannī</div>
+        <div class="dua-meaning">O Allah, You are the Pardoner and You love to pardon, so pardon me.</div>
+      </div>
+      <div class="dua-card">
+        <div class="dua-arabic">رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ</div>
+        <div class="dua-transliteration">Rabbanā ẓalamnā anfusanā wa-in lam taghfir lanā wa-tarḥamnā lanakūnanna minal-khāsirīn</div>
+        <div class="dua-meaning">Our Lord, we have wronged ourselves. If You do not forgive us and have mercy on us, we will surely be among the losers. (Al-A'raf 7:23)</div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-general">
+      <div class="dua-card">
+        <div class="dua-arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
+        <div class="dua-transliteration">Rabbanā ātinā fid-dunyā ḥasanatan wa fil-ākhirati ḥasanatan wa qinā ʿadhāban-nār</div>
+        <div class="dua-meaning">Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire. (Al-Baqarah 2:201)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="logo-brand" style="font-size:1.1rem;">Ismaan</div>
+    <div class="footer-tagline">Know it. Feel it. Practice it.</div>
+  </div>
+</div>
+
+<script>
+const virtues = [
+  {
+    title: "The Best Day Allah Created",
+    body: "The Day of Arafah (9th Dhul Hijjah) is the most virtuous day of the year. It is the day on which Allah perfected the religion, completed His blessing, and was pleased with Islam as a way of life.",
+    hadith: "\"This day I have perfected for you your religion and completed My favor upon you and have approved for you Islam as religion.\" — Quran 5:3 (revealed on the Day of Arafah)"
+  },
+  {
+    title: "Fasting Expiates Two Years of Sins",
+    body: "For those not performing Hajj, fasting on this day expiates sins from the previous year and the coming year. This is an extraordinary mercy from Allah — two full years of minor sins wiped clean by one fast.",
+    hadith: "\"Fasting on the Day of Arafah, I hope from Allah, expiates for the sins of the year before it and the year after it.\" — Prophet Muhammad ﷺ (Muslim)"
+  },
+  {
+    title: "Allah Boasts to His Angels About the Pilgrims",
+    body: "On this day, Allah descends to the nearest heaven (in a manner befitting His majesty) and shows pride in the people standing on the plain of Arafah to His angels, proclaiming their forgiveness and freedom from the Fire.",
+    hadith: "\"There is no day on which Allah frees more people from the Fire than the Day of Arafah.\" — Prophet Muhammad ﷺ (Muslim)"
+  },
+  {
+    title: "The Core of Hajj",
+    body: "Arafah is the pillar upon which the entire pilgrimage rests. The Prophet ﷺ said 'Hajj is Arafah,' meaning that standing on its plain is the essence of the whole journey — nothing replaces it.",
+    hadith: "\"Hajj is Arafah.\" — Prophet Muhammad ﷺ (Abu Dawud, Tirmidhi, Ibn Majah)"
+  },
+  {
+    title: "Du'a is Most Accepted",
+    body: "This day carries an extraordinary acceptance of supplication. The gates of heaven are wide open. Pour your heart out to Allah — for yourself, your family, and the entire Muslim ummah.",
+    hadith: "\"The best du'a is the du'a of the Day of Arafah.\" — Prophet Muhammad ﷺ (Tirmidhi)"
+  },
+  {
+    title: "Satan is Humiliated on This Day",
+    body: "On no other day is Shaytan seen as more disgraced, belittled, and enraged than on the Day of Arafah — because he witnesses the vast mercy Allah showers upon the believers and the multitude of sins He forgives.",
+    hadith: "\"Shaytan is not seen on any day more humiliated, more contemptible, more defeated than on the Day of Arafah.\" — Muwatta Imam Malik"
+  }
+];
+
+const deeds = [
+  { emoji: "🌙", name: "Fast the Day", sub: "For non-pilgrims" },
+  { emoji: "🤲", name: "Make Du'a", sub: "Abundantly & sincerely" },
+  { emoji: "📖", name: "Read Quran", sub: "As much as possible" },
+  { emoji: "🔁", name: "Say Lā ilāha illallāh", sub: "Frequently repeat" },
+  { emoji: "🙏", name: "Seek Forgiveness", sub: "Istighfar & tawbah" },
+  { emoji: "💛", name: "Send Salawat", sub: "Upon the Prophet ﷺ" },
+  { emoji: "📿", name: "Dhikr & Tahleel", sub: "SubhanAllah, Alhamdulillah" },
+  { emoji: "💸", name: "Give Sadaqah", sub: "Charity this blessed day" },
+  { emoji: "🕌", name: "Pray Nafl", sub: "Extra voluntary prayers" },
+  { emoji: "🌟", name: "Say Takbeer", sub: "Allahu Akbar after Fajr" },
+  { emoji: "📞", name: "Call Family", sub: "Spread the blessings" },
+  { emoji: "💭", name: "Self-Reflection", sub: "Repent & set intentions" }
+];
+
+function renderVirtues() {
+  const list = document.getElementById('virtues-list');
+  virtues.forEach((v, i) => {
+    const el = document.createElement('div');
+    el.className = 'virtue-card';
+    el.innerHTML = `
+      <div class="virtue-header">
+        <div class="virtue-num">${i + 1}</div>
+        <div class="virtue-title">${v.title}</div>
+        <div class="virtue-chevron">▾</div>
+      </div>
+      <div class="virtue-body">
+        ${v.body}
+        <div class="virtue-hadith">${v.hadith}</div>
+      </div>
+    `;
+    el.onclick = () => {
+      el.classList.toggle('open');
+    };
+    list.appendChild(el);
+  });
+}
+
+let doneDeeds = new Set();
+
+function renderDeeds() {
+  const grid = document.getElementById('deedsGrid');
+  document.getElementById('trackerTotal').textContent = deeds.length;
+  deeds.forEach((d, i) => {
+    const el = document.createElement('div');
+    el.className = 'deed-tile';
+    el.innerHTML = `
+      <div class="deed-check">✓</div>
+      <div class="deed-emoji">${d.emoji}</div>
+      <div class="deed-name">${d.name}</div>
+      <div class="deed-sub">${d.sub}</div>
+    `;
+    el.onclick = () => {
+      if (doneDeeds.has(i)) {
+        doneDeeds.delete(i);
+        el.classList.remove('done');
+      } else {
+        doneDeeds.add(i);
+        el.classList.add('done');
+      }
+      updateTracker();
+    };
+    grid.appendChild(el);
+  });
+}
+
+function updateTracker() {
+  const pct = Math.round((doneDeeds.size / deeds.length) * 100);
+  document.getElementById('trackerBar').style.width = pct + '%';
+  document.getElementById('trackerCount').textContent = doneDeeds.size;
+}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function makeStars() {
+  const bg = document.getElementById('starsBg');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = (Math.random() * 4) + 's';
+    s.style.animationDuration = (2 + Math.random() * 3) + 's';
+    s.style.opacity = Math.random() * 0.6 + 0.1;
+    bg.appendChild(s);
+  }
+}
+
+function setupScrollReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.scroll-reveal').forEach(el => obs.observe(el));
+}
+
+makeStars();
+renderVirtues();
+renderDeeds();
+setupScrollReveal();
+</script>
